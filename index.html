@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ငါ့ကို ချစ်လား? 🥺💕</title>
+  <meta name="description" content="A cute, playful, romantic surprise page made with love 💕" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ══════════════════════════════════════════════════════════
+       1. DESIGN TOKENS
+    ══════════════════════════════════════════════════════════ */
+    :root {
+      /* Colors */
+      --color-bg-start:   #fff0f7;
+      --color-bg-mid:     #ffeaf2;
+      --color-bg-end:     #fff5ec;
+      --color-pink-light: #ffd6e7;
+      --color-pink-mid:   #ffaecf;
+      --color-text-dark:  #6b3a5c;
+      --color-text-mid:   #c07098;
+      --color-shadow:     rgba(255, 140, 185, 0.25);
+
+      /* Love button gradient */
+      --love-btn-from: #ff6bae;
+      --love-btn-to:   #ff3d8a;
+
+      /* Spacing */
+      --card-padding:   40px 36px 36px;
+      --card-radius:    32px;
+      --card-max-width: 500px;
+
+      /* Typography */
+      --font-base: 'Nunito', 'Segoe UI', sans-serif;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       2. RESET
+    ══════════════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       3. BASE LAYOUT
+    ══════════════════════════════════════════════════════════ */
+    html, body {
+      height: 100%;
+      font-family: var(--font-base);
+      background: linear-gradient(
+        135deg,
+        var(--color-bg-start) 0%,
+        var(--color-bg-mid)   40%,
+        var(--color-bg-end)   100%
+      );
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       4. BACKGROUND AMBIENT HEARTS
+    ══════════════════════════════════════════════════════════ */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-heart {
+      position: absolute;
+      bottom: -40px;
+      left: var(--x, 50%);
+      font-size: clamp(12px, 2vw, 22px);
+      opacity: 0;
+      user-select: none;
+      animation: floatUp var(--dur, 8s) ease-in var(--delay, 0s) infinite;
+    }
+
+    @keyframes floatUp {
+      0%   { transform: translateY(0) scale(1) rotate(0deg);      opacity: 0;    }
+      10%  {                                                        opacity: 0.55; }
+      80%  {                                                        opacity: 0.3;  }
+      100% { transform: translateY(-110vh) scale(0.6) rotate(20deg); opacity: 0; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       5. MAIN CARD
+    ══════════════════════════════════════════════════════════ */
+    .card {
+      position: relative;
+      z-index: 10;
+      max-width: var(--card-max-width);
+      width: 100%;
+      padding: var(--card-padding);
+      text-align: center;
+
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1.5px solid rgba(255, 190, 220, 0.55);
+      border-radius: var(--card-radius);
+      box-shadow:
+        0 8px 40px var(--color-shadow),
+        0 2px 12px rgba(255, 100, 160, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+      animation: cardEntrance 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    /* Decorative glowing orbs in card corners */
+    .card::before,
+    .card::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .card::before {
+      width: 130px; height: 130px;
+      background: radial-gradient(circle, rgba(255, 180, 210, 0.22) 0%, transparent 70%);
+      top: -35px; right: -20px;
+    }
+    .card::after {
+      width: 90px; height: 90px;
+      background: radial-gradient(circle, rgba(255, 220, 150, 0.18) 0%, transparent 70%);
+      bottom: -25px; left: -10px;
+    }
+
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(30px) scale(0.92); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+
+    /* ── Decorative corner emojis ── */
+    .card-deco {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--card-radius);
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .card-deco span {
+      position: absolute;
+      font-size: 13px;
+      opacity: 0.18;
+      animation: decoFloat 5s ease-in-out infinite;
+    }
+    @keyframes decoFloat {
+      0%, 100% { transform: translateY(0)   rotate(-5deg); }
+      50%       { transform: translateY(-8px) rotate(5deg); }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       6. CSS CHARACTER ART – BUBU (PINK BEAR) & DUDU (YELLOW DUCK)
+    ══════════════════════════════════════════════════════════ */
+    .characters {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 20px;
+      height: 120px;
+      margin-bottom: 22px;
+      animation: bobble 3s ease-in-out infinite;
+    }
+
+    @keyframes bobble {
+      0%, 100% { transform: translateY(0);    }
+      50%       { transform: translateY(-6px); }
+    }
+
+    /* ── Shared character helpers ── */
+    .bubu, .dudu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bubu .eye,
+    .dudu .eye {
+      position: relative;
+      border-radius: 50%;
+    }
+    .bubu .eye::after,
+    .dudu .eye::after {
+      content: '';
+      position: absolute;
+      width: 3px; height: 4px;
+      background: white;
+      border-radius: 50%;
+      top: 1px; left: 2px;
+    }
+
+    /* ── Bubu ── */
+    .bubu .head {
+      position: relative;
+      width: 72px; height: 68px;
+      background: #ffb3cc;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(255, 100, 160, 0.25);
+    }
+    .bubu .ear {
+      position: absolute;
+      top: -8px;
+      width: 22px; height: 22px;
+      background: #ffb3cc;
+      border-radius: 50%;
+    }
+    .bubu .ear.left  { left: 6px; }
+    .bubu .ear.right { right: 6px; }
+    .bubu .ear::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px; height: 12px;
+      background: #ffd6e7;
+      border-radius: 50%;
+    }
+    .bubu .blush {
+      position: absolute;
+      top: 38px;
+      width: 14px; height: 8px;
+      background: rgba(255, 100, 140, 0.35);
+      border-radius: 50%;
+    }
+    .bubu .blush.left  { left: 8px; }
+    .bubu .blush.right { right: 8px; }
+    .bubu .face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .bubu .eyes   { display: flex; gap: 14px; }
+    .bubu .eye    { width: 10px; height: 12px; background: #5c2a3a; }
+    .bubu .nose-mouth {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+    .bubu .nose {
+      width: 18px; height: 12px;
+      background: #e87a9f;
+      border-radius: 50%;
+    }
+    .bubu .mouth {
+      width: 14px; height: 7px;
+      border: 2.5px solid #c05070;
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+    }
+    .bubu .body {
+      position: relative;
+      width: 64px; height: 58px;
+      background: #ffb3cc;
+      border-radius: 40% 40% 50% 50%;
+      margin-top: -6px;
+      box-shadow: 0 4px 12px rgba(255, 100, 160, 0.2);
+    }
+    .bubu .tummy {
+      position: absolute;
+      top: 8px; left: 50%;
+      transform: translateX(-50%);
+      width: 34px; height: 30px;
+      background: #ffd6e7;
+      border-radius: 50%;
+    }
+
+    /* ── Middle heart ── */
+    .middle-heart {
+      font-size: 28px;
+      margin-bottom: 18px;
+      filter: drop-shadow(0 2px 6px rgba(255, 80, 130, 0.4));
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1);    }
+      15%       { transform: scale(1.3);  }
+      30%       { transform: scale(1);    }
+      45%       { transform: scale(1.15); }
+      60%       { transform: scale(1);    }
+    }
+
+    /* ── Dudu ── */
+    .dudu .head {
+      position: relative;
+      width: 66px; height: 62px;
+      background: #ffe57a;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(255, 200, 50, 0.3);
+    }
+    .dudu .tuft {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+    }
+    .dudu .tuft span {
+      display: block;
+      width: 8px; height: 14px;
+      background: #ffc800;
+      border-radius: 50% 50% 30% 30%;
+    }
+    .dudu .tuft span:nth-child(2) { height: 18px; margin-top: -4px; }
+    .dudu .blush {
+      position: absolute;
+      top: 38px;
+      width: 14px; height: 8px;
+      background: rgba(255, 140, 60, 0.35);
+      border-radius: 50%;
+    }
+    .dudu .blush.left  { left: 6px; }
+    .dudu .blush.right { right: 6px; }
+    .dudu .face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .dudu .eyes  { display: flex; gap: 12px; }
+    .dudu .eye   { width: 10px; height: 12px; background: #3a2800; }
+    .dudu .beak  {
+      width: 18px; height: 10px;
+      background: #ff9f28;
+      border-radius: 40% 40% 50% 50%;
+      margin-top: 2px;
+    }
+    .dudu .body {
+      position: relative;
+      width: 58px; height: 54px;
+      background: #ffe57a;
+      border-radius: 40% 40% 50% 50%;
+      margin-top: -6px;
+      box-shadow: 0 4px 12px rgba(255, 200, 50, 0.2);
+    }
+    .dudu .tummy {
+      position: absolute;
+      top: 8px; left: 50%;
+      transform: translateX(-50%);
+      width: 30px; height: 26px;
+      background: #fff9d0;
+      border-radius: 50%;
+    }
+    .dudu .wing {
+      position: absolute;
+      top: 12px;
+      width: 18px; height: 26px;
+      background: #ffd000;
+      border-radius: 50% 20% 50% 20%;
+    }
+    .dudu .wing.left  { left:  -10px; transform: rotate(-15deg);             }
+    .dudu .wing.right { right: -10px; transform: rotate(15deg) scaleX(-1);   }
+
+    /* ══════════════════════════════════════════════════════════
+       7. QUESTION & SUBTITLE
+    ══════════════════════════════════════════════════════════ */
+    .question {
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+      font-weight: 900;
+      color: var(--color-text-dark);
+      line-height: 1.35;
+      margin-bottom: 8px;
+      letter-spacing: 0.01em;
+    }
+
+    .subtitle {
+      font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+      color: var(--color-text-mid);
+      opacity: 0.8;
+      margin-bottom: 28px;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       8. BUTTONS
+    ══════════════════════════════════════════════════════════ */
+
+    /* ── Love button (static, grows in place) ── */
+    .btn-love {
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      white-space: nowrap;
+      cursor: pointer;
+
+      padding: 13px 28px;
+      border: none;
+      border-radius: 50px;
+      font-family: var(--font-base);
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-weight: 800;
+      color: white;
+
+      background: linear-gradient(135deg, var(--love-btn-from) 0%, var(--love-btn-to) 100%);
+      box-shadow: 0 6px 20px rgba(255, 60, 130, 0.4);
+
+      transition:
+        transform  0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        font-size  0.5s  cubic-bezier(0.34, 1.56, 0.64, 1),
+        padding    0.5s  ease,
+        box-shadow 0.3s  ease;
+    }
+
+    /* Shine overlay */
+    .btn-love::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 60%);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .btn-love:hover  { transform: scale(1.08) translateY(-2px); box-shadow: 0 10px 28px rgba(255, 60, 130, 0.5); }
+    .btn-love:active { transform: scale(0.96); }
+
+    .btn-love.is-pulsing {
+      animation: pulseBurst 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes pulseBurst {
+      0%   { transform: scale(1);    }
+      50%  { transform: scale(1.18); }
+      100% { transform: scale(1);    }
+    }
+
+    /* ── No button (fixed to viewport so it can NEVER hide behind love button) ── */
+    .btn-no {
+      position: fixed;          /* viewport-relative – always on top */
+      z-index: 9990;            /* above the card (z-index: 10) */
+      white-space: nowrap;
+      cursor: pointer;
+
+      padding: 11px 22px;
+      border: 2px solid var(--color-pink-light);
+      border-radius: 50px;
+      font-family: var(--font-base);
+      font-size: clamp(0.8rem, 3vw, 0.95rem);
+      font-weight: 700;
+      color: var(--color-text-mid);
+
+      background: white;
+      box-shadow: 0 4px 12px rgba(255, 140, 185, 0.15);
+
+      transition:
+        transform  0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        font-size  0.4s ease,
+        opacity    0.4s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .btn-no:hover  { transform: scale(1.04) translateY(-1px); box-shadow: 0 6px 16px rgba(255, 140, 185, 0.25); }
+    .btn-no:active { transform: scale(0.95); }
+
+    /* ══════════════════════════════════════════════════════════
+       9. MESSAGE AREA
+    ══════════════════════════════════════════════════════════ */
+    .message-area {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .message {
+      padding: 10px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 174, 207, 0.4);
+      background: rgba(255, 214, 231, 0.45);
+
+      font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+      font-weight: 700;
+      color: var(--color-text-dark);
+      line-height: 1.5;
+      text-align: center;
+
+      opacity: 0;
+      transform: translateY(8px) scale(0.95);
+      transition:
+        opacity   0.35s ease,
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .message.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       10. SUCCESS BANNER
+    ══════════════════════════════════════════════════════════ */
+    .success-banner {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      animation: cardEntrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .success-banner.is-visible { display: flex; }
+
+    .success-banner .big-heart {
+      font-size: clamp(38px, 10vw, 52px);
+      animation: heartbeat 1.4s ease-in-out infinite;
+    }
+
+    .success-banner p {
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
+      font-weight: 800;
+      line-height: 1.5;
+      background: linear-gradient(135deg, #ff6bae, #c0397e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       11. PARTICLE ANIMATIONS (hearts & sparkles spawned by JS)
+    ══════════════════════════════════════════════════════════ */
+    .particle-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      user-select: none;
+      line-height: 1;
+      animation: heartFly 1.3s ease-out forwards;
+    }
+
+    @keyframes heartFly {
+      0%   { transform: translate(0, 0)                           scale(0.5) rotate(0deg);          opacity: 1; }
+      60%  {                                                                                          opacity: 0.9; }
+      100% { transform: translate(var(--tx, 0), var(--ty, -120px)) scale(1.1) rotate(var(--rot, 20deg)); opacity: 0; }
+    }
+
+    .particle-sparkle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      user-select: none;
+      line-height: 1;
+      animation: sparklePop 0.9s ease-out forwards;
+    }
+
+    @keyframes sparklePop {
+      0%   { transform: scale(0)   rotate(0deg);    opacity: 1; }
+      50%  { transform: scale(1.5) rotate(180deg);  opacity: 1; }
+      100% { transform: scale(0)   rotate(360deg);  opacity: 0; }
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       12. FINAL OVERLAY (subtle pink wash when love is declared)
+    ══════════════════════════════════════════════════════════ */
+    .final-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8000;
+      pointer-events: none;
+      background: rgba(255, 220, 235, 0);
+      transition: background 0.7s ease;
+    }
+
+    .final-overlay.is-active { background: rgba(255, 220, 235, 0.12); }
+
+    /* ══════════════════════════════════════════════════════════
+       13. RESPONSIVE
+       Breakpoints: 600px (small tablet), 480px (large phone),
+                    400px (compact phone)
+    ══════════════════════════════════════════════════════════ */
+
+    /* ── ≤600px: small tablet / landscape phone ── */
+    @media (max-width: 600px) {
+      body { padding: 16px; }
+
+      .card {
+        padding: 32px 24px 28px;
+        border-radius: 28px;
+      }
+
+      .characters {
+        gap: 14px;
+        height: 104px;
+        margin-bottom: 18px;
+      }
+
+      /* Scale down Bubu's head & body */
+      .bubu .head { width: 60px; height: 56px; }
+      .bubu .ear  { width: 18px; height: 18px; top: -6px; }
+      .bubu .ear.left  { left:  4px; }
+      .bubu .ear.right { right: 4px; }
+      .bubu .blush { top: 32px; width: 12px; height: 6px; }
+      .bubu .blush.left  { left:  6px; }
+      .bubu .blush.right { right: 6px; }
+      .bubu .eye   { width: 8px;  height: 10px; }
+      .bubu .nose  { width: 14px; height: 10px; }
+      .bubu .mouth { width: 11px; height: 6px; }
+      .bubu .body  { width: 52px; height: 48px; }
+      .bubu .tummy { width: 28px; height: 24px; }
+
+      /* Scale down Dudu's head & body */
+      .dudu .head { width: 54px; height: 52px; }
+      .dudu .tuft { top: -10px; }
+      .dudu .tuft span { width: 6px; height: 12px; }
+      .dudu .tuft span:nth-child(2) { height: 15px; }
+      .dudu .blush { top: 32px; width: 12px; height: 6px; }
+      .dudu .blush.left  { left:  4px; }
+      .dudu .blush.right { right: 4px; }
+      .dudu .eye   { width: 8px;  height: 10px; }
+      .dudu .beak  { width: 14px; height: 8px; }
+      .dudu .body  { width: 48px; height: 44px; }
+      .dudu .tummy { width: 24px; height: 22px; }
+      .dudu .wing  { width: 14px; height: 20px; top: 10px; }
+      .dudu .wing.left  { left:  -8px; }
+      .dudu .wing.right { right: -8px; }
+
+      .middle-heart { font-size: 22px; margin-bottom: 14px; }
+
+      .message-area { min-height: 50px; }
+    }
+
+    /* ── ≤480px: standard phone ── */
+    @media (max-width: 480px) {
+      .card {
+        padding: 28px 18px 24px;
+        border-radius: 24px;
+      }
+
+      .card-deco span { font-size: 11px; }
+
+      .characters {
+        gap: 10px;
+        height: 94px;
+        margin-bottom: 14px;
+      }
+
+      /* Further shrink Bubu */
+      .bubu .head { width: 52px; height: 48px; }
+      .bubu .body { width: 46px; height: 42px; }
+      .bubu .tummy { width: 24px; height: 20px; }
+
+      /* Further shrink Dudu */
+      .dudu .head { width: 48px; height: 44px; }
+      .dudu .body { width: 42px; height: 38px; }
+      .dudu .tummy { width: 20px; height: 18px; }
+
+      .middle-heart { font-size: 18px; margin-bottom: 10px; }
+
+      .btn-love { padding: 11px 22px; }
+      .btn-no   { padding: 9px 16px; }
+
+      .message-area { min-height: 44px; }
+      .message      { padding: 9px 14px; border-radius: 14px; }
+
+      .success-banner { gap: 8px; margin-top: 8px; }
+    }
+
+    /* ── ≤400px: compact / small phone ── */
+    @media (max-width: 400px) {
+      body { padding: 10px; }
+
+      .card {
+        padding: 22px 14px 20px;
+        border-radius: 20px;
+      }
+
+      .characters {
+        height: 80px;
+        margin-bottom: 10px;
+        gap: 8px;
+      }
+
+      /* Minimal character sizes */
+      .bubu .head { width: 44px; height: 42px; }
+      .bubu .ear  { width: 14px; height: 14px; top: -5px; }
+      .bubu .body { width: 38px; height: 34px; }
+      .bubu .tummy { width: 20px; height: 16px; }
+
+      .dudu .head { width: 40px; height: 38px; }
+      .dudu .body { width: 36px; height: 32px; }
+      .dudu .tummy { width: 18px; height: 14px; }
+
+      .middle-heart { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient floating hearts layer -->
+  <div class="bg-hearts" id="bgHearts" aria-hidden="true"></div>
+
+  <!-- Subtle pink overlay for the final celebration state -->
+  <div class="final-overlay" id="finalOverlay" aria-hidden="true"></div>
+
+  <!-- ════════════════════════════════════════════════════════
+       MAIN CARD
+  ════════════════════════════════════════════════════════ -->
+  <main class="card" role="main" aria-label="Love question page">
+
+    <!-- Decorative corner emojis -->
+    <div class="card-deco" aria-hidden="true">
+      <span style="top:14px; left:20px; animation-delay:0s;">💕</span>
+      <span style="top:18px; right:24px; animation-delay:1.2s;">✨</span>
+      <span style="bottom:20px; left:24px; animation-delay:2.5s;">🌸</span>
+      <span style="bottom:16px; right:20px; animation-delay:0.8s;">💖</span>
+    </div>
+
+    <!-- Bubu & Dudu characters -->
+    <div class="characters" aria-hidden="true">
+
+      <!-- Bubu (pink bear) -->
+      <div class="bubu">
+        <div class="head">
+          <div class="ear left"></div>
+          <div class="ear right"></div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="face">
+            <div class="eyes">
+              <div class="eye"></div>
+              <div class="eye"></div>
+            </div>
+            <div class="nose-mouth">
+              <div class="nose"></div>
+              <div class="mouth"></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="tummy"></div>
+        </div>
+      </div>
+
+      <!-- Middle animated heart -->
+      <div class="middle-heart">💗</div>
+
+      <!-- Dudu (yellow duck) -->
+      <div class="dudu">
+        <div class="head">
+          <div class="tuft"><span></span><span></span><span></span></div>
+          <div class="blush left"></div>
+          <div class="blush right"></div>
+          <div class="face">
+            <div class="eyes">
+              <div class="eye"></div>
+              <div class="eye"></div>
+            </div>
+            <div class="beak"></div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="tummy"></div>
+          <div class="wing left"></div>
+          <div class="wing right"></div>
+        </div>
+      </div>
+
+    </div><!-- /.characters -->
+
+    <!-- Question -->
+    <h1 class="question">ငါ့ကို ချစ်လား? 🥺💕</h1>
+    <p class="subtitle">မှန်မှန် ပြောပါနော်…</p>
+
+    <!-- Love button (stays here in the card, grows in place) -->
+    <div style="display:flex; justify-content:center; margin-bottom:28px; min-height:80px; align-items:center;">
+      <button
+        class="btn-love"
+        id="btnLove"
+        aria-label="ချစ်တယ် – Yes, I love you"
+        onclick="handleLove()"
+      >ချစ်တယ် ❤️</button>
+    </div>
+
+    <!-- Dynamic reaction message -->
+    <div class="message-area">
+      <div class="message" id="msgBox" role="status" aria-live="polite"></div>
+    </div>
+
+    <!-- Success banner (revealed after clicking love) -->
+    <div class="success-banner" id="successBanner" aria-live="assertive">
+      <div class="big-heart" aria-hidden="true">💖</div>
+      <p>မီးလေးကို အများရီးချစ်ပါတယ် 🥹✨</p>
+    </div>
+
+  </main><!-- /.card -->
+
+  <!--
+    "No" button is fixed to the VIEWPORT (position:fixed in CSS).
+    This guarantees it always floats above the growing love button
+    and can never be hidden behind it, regardless of how large it grows.
+  -->
+  <button
+    class="btn-no"
+    id="btnNo"
+    aria-label="မချစ်ဘူး – No"
+    onclick="handleNo()"
+  >မချစ်ဘူး 😏</button>
+
+
+  <script>
+    /* ════════════════════════════════════════════════════════
+       CONSTANTS
+    ════════════════════════════════════════════════════════ */
+
+    /** How much the love button grows per no-click (scale multiplier). */
+    const LOVE_GROW_PER_CLICK = 0.22;
+    const LOVE_MAX_SCALE      = 3.6;
+
+    /** Font-size (rem) increase per no-click for the love button. */
+    const LOVE_FONT_PER_CLICK = 0.18;
+    const LOVE_MAX_FONT       = 2.5;   // rem
+
+    /** Padding growth per no-click (px). */
+    const LOVE_PAD_V_START = 14;
+    const LOVE_PAD_H_START = 32;
+    const LOVE_PAD_V_STEP  = 3;
+    const LOVE_PAD_H_STEP  = 6;
+
+    /** No button shrink & fade per click. */
+    const NO_SCALE_START  = 0.78;
+    const NO_SCALE_STEP   = 0.08;
+    const NO_MIN_SCALE    = 0.3;
+    const NO_FONT_START   = 0.95;   // rem
+    const NO_FONT_STEP    = 0.06;
+    const NO_MIN_FONT     = 0.52;   // rem
+    const NO_OPACITY_STEP = 0.1;
+    const NO_MIN_OPACITY  = 0.35;
+
+    /** After this many no-clicks the no button is disabled. */
+    const NO_DISABLE_AFTER = 6;
+
+    /** Cute reactions shown after each no-click (index = noCount - 1). */
+    const NO_REACTIONS = [
+      'ဟင်? 😭',
+      'သေချာလို့လား? 🥺',
+      'တစ်ခါထပ်စဉ်းစားပါဦး 😭💕',
+      'မရဘူးနော် 😤❤️',
+      'ငါ့ကို ဘာမှ မဆိုလို? 🫣💔',
+      '… တကယ်? 😢',
+      'အဲ့ဒါဆို… ချစ်တယ်ကိုပဲ နှိပ်ရတော့မယ်နော် 🥹💕',
+    ];
+
+    const HEART_EMOJIS   = ['💕', '💗', '💖', '💓', '❤️', '🌸', '✨', '💞'];
+    const SPARKLE_EMOJIS = ['✨', '⭐', '🌟', '💫', '🌸'];
+
+    /** Total background hearts to create. */
+    const BG_HEART_COUNT = 15;
+
+    /* ════════════════════════════════════════════════════════
+       STATE
+    ════════════════════════════════════════════════════════ */
+    let noCount = 0;
+    let hasWon  = false;
+
+    /* ════════════════════════════════════════════════════════
+       DOM REFERENCES
+    ════════════════════════════════════════════════════════ */
+    const btnLove       = document.getElementById('btnLove');
+    const btnNo         = document.getElementById('btnNo');
+    const msgBox        = document.getElementById('msgBox');
+    const successBanner = document.getElementById('successBanner');
+    const finalOverlay  = document.getElementById('finalOverlay');
+    const bgHearts      = document.getElementById('bgHearts');
+
+    /* ════════════════════════════════════════════════════════
+       INITIALISATION – place the "no" button and seed bg hearts
+    ════════════════════════════════════════════════════════ */
+    (function init() {
+      placeNoButtonBesideLove();
+      seedBackgroundHearts();
+    })();
+
+    /**
+     * Position the fixed no-button relative to the love button on load.
+     * - On wide screens (≥560px): place it to the RIGHT of the love button.
+     * - On narrow screens (<560px): place it BELOW the love button so it
+     *   never overflows off the right edge of a phone screen.
+     */
+    function placeNoButtonBesideLove() {
+      const r          = btnLove.getBoundingClientRect();
+      const noW        = btnNo.offsetWidth;
+      const noH        = btnNo.offsetHeight;
+      const gap        = 14;
+      const isNarrow   = window.innerWidth < 560;
+
+      if (isNarrow) {
+        // Center it horizontally below the love button
+        const centeredLeft = r.left + r.width / 2 - noW / 2;
+        btnNo.style.left = Math.max(8, Math.min(centeredLeft, window.innerWidth - noW - 8)) + 'px';
+        btnNo.style.top  = r.bottom + gap + 'px';
+      } else {
+        // Side-by-side on wide screens
+        btnNo.style.top  = r.top + r.height / 2 - noH / 2 + 'px';
+        btnNo.style.left = r.right + gap + 'px';
+      }
+    }
+
+    /** Seed ambient floating hearts in the background layer. */
+    function seedBackgroundHearts() {
+      const emojis = ['💕', '💗', '💖', '💓', '🌸', '✨', '💞', '🩷'];
+      for (let i = 0; i < BG_HEART_COUNT; i++) {
+        const el    = document.createElement('span');
+        el.className = 'bg-heart';
+        el.textContent = emojis[i % emojis.length];
+        el.setAttribute('aria-hidden', 'true');
+        const x     = Math.random() * 100;
+        const dur   = 7  + Math.random() * 10;
+        const delay = Math.random() * 10;
+        el.style.cssText = `--x:${x}%; --dur:${dur}s; --delay:${delay}s; animation-delay:${delay}s;`;
+        bgHearts.appendChild(el);
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════
+       PARTICLE HELPERS
+    ════════════════════════════════════════════════════════ */
+
+    /**
+     * Spawn emoji hearts flying outward from (cx, cy).
+     * @param {number} cx - center x in viewport px
+     * @param {number} cy - center y in viewport px
+     * @param {number} count
+     */
+    function spawnHearts(cx, cy, count = 8) {
+      for (let i = 0; i < count; i++) {
+        const el    = document.createElement('span');
+        el.className = 'particle-heart';
+        el.textContent = HEART_EMOJIS[Math.floor(Math.random() * HEART_EMOJIS.length)];
+        el.setAttribute('aria-hidden', 'true');
+
+        const angle = Math.random() * Math.PI * 2;
+        const dist  = 55 + Math.random() * 110;
+        const tx    = Math.cos(angle) * dist;
+        const ty    = -Math.abs(Math.sin(angle)) * dist - 50;
+        const rot   = (Math.random() - 0.5) * 70;
+        const delay = Math.random() * 0.25;
+        const size  = 14 + Math.random() * 14;
+
+        el.style.cssText = `
+          left: ${cx}px; top: ${cy}px;
+          --tx: ${tx}px; --ty: ${ty}px; --rot: ${rot}deg;
+          animation-delay: ${delay}s;
+          font-size: ${size}px;
+        `;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1500);
+      }
+    }
+
+    /**
+     * Spawn sparkle emojis bursting around (cx, cy).
+     * @param {number} cx
+     * @param {number} cy
+     * @param {number} count
+     */
+    function spawnSparkles(cx, cy, count = 5) {
+      for (let i = 0; i < count; i++) {
+        const el    = document.createElement('span');
+        el.className = 'particle-sparkle';
+        el.textContent = SPARKLE_EMOJIS[Math.floor(Math.random() * SPARKLE_EMOJIS.length)];
+        el.setAttribute('aria-hidden', 'true');
+
+        const ox    = (Math.random() - 0.5) * 90;
+        const oy    = (Math.random() - 0.5) * 90;
+        const delay = Math.random() * 0.2;
+        const size  = 12 + Math.random() * 10;
+
+        el.style.cssText = `
+          left: ${cx + ox}px; top: ${cy + oy}px;
+          animation-delay: ${delay}s;
+          font-size: ${size}px;
+        `;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 1000);
+      }
+    }
+
+    /** Return the viewport center coordinates of an element. */
+    function centerOf(el) {
+      const r = el.getBoundingClientRect();
+      return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+    }
+
+    /* ════════════════════════════════════════════════════════
+       MESSAGE HELPER
+    ════════════════════════════════════════════════════════ */
+
+    /** Show a message in the reaction box with a fade-in transition. */
+    function showMessage(text) {
+      msgBox.classList.remove('is-visible');
+      msgBox.textContent = text;
+      // Double rAF ensures the remove transition plays before re-adding
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => msgBox.classList.add('is-visible'))
+      );
+    }
+
+    /* ════════════════════════════════════════════════════════
+       LOVE BUTTON GROWTH HELPER
+    ════════════════════════════════════════════════════════ */
+
+    /** Apply visual growth to the love button based on current noCount. */
+    function growLoveButton() {
+      const scale      = Math.min(1 + noCount * LOVE_GROW_PER_CLICK, LOVE_MAX_SCALE);
+      const fontSize   = Math.min(1.05 + noCount * LOVE_FONT_PER_CLICK, LOVE_MAX_FONT);
+      const padV       = Math.min(LOVE_PAD_V_START + noCount * LOVE_PAD_V_STEP, 36);
+      const padH       = Math.min(LOVE_PAD_H_START + noCount * LOVE_PAD_H_STEP, 80);
+      const shadowAlpha = Math.min(0.35 + noCount * 0.06, 0.7);
+
+      btnLove.style.transform  = `scale(${scale})`;
+      btnLove.style.fontSize   = `${fontSize}rem`;
+      btnLove.style.padding    = `${padV}px ${padH}px`;
+      btnLove.style.boxShadow  = `0 ${6 + noCount * 4}px ${20 + noCount * 6}px rgba(255,60,130,${shadowAlpha})`;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       NO BUTTON MOVEMENT HELPER
+    ════════════════════════════════════════════════════════ */
+
+    /**
+     * Move the no button to a random viewport position that is
+     * safely within the visible screen and away from screen edges.
+     */
+    function moveNoButton() {
+      const margin   = 60;
+      const maxX     = window.innerWidth  - btnNo.offsetWidth  - margin;
+      const maxY     = window.innerHeight - btnNo.offsetHeight - margin;
+      const randomX  = margin + Math.random() * maxX;
+      const randomY  = margin + Math.random() * maxY;
+
+      const scale    = Math.max(NO_SCALE_START   - noCount * NO_SCALE_STEP,   NO_MIN_SCALE);
+      const fontSize = Math.max(NO_FONT_START    - noCount * NO_FONT_STEP,    NO_MIN_FONT);
+      const opacity  = Math.max(1                - noCount * NO_OPACITY_STEP, NO_MIN_OPACITY);
+
+      btnNo.style.left      = `${randomX}px`;
+      btnNo.style.top       = `${randomY}px`;
+      btnNo.style.transform = `scale(${scale})`;
+      btnNo.style.fontSize  = `${fontSize}rem`;
+      btnNo.style.opacity   = `${opacity}`;
+    }
+
+    /* ════════════════════════════════════════════════════════
+       EVENT HANDLERS
+    ════════════════════════════════════════════════════════ */
+
+    /** Called when the user clicks "ချစ်တယ် ❤️". */
+    function handleLove() {
+      if (hasWon) return;
+      hasWon = true;
+
+      // Reset love button back to its original CSS size (smooth transition).
+      // Clearing inline styles lets the stylesheet values take over again.
+      btnLove.style.transform = '';
+      btnLove.style.fontSize  = '';
+      btnLove.style.padding   = '';
+      btnLove.style.boxShadow = '';
+
+      const { x, y } = centerOf(btnLove);
+
+      // Primary burst from the button
+      spawnHearts(x, y, 18);
+      spawnSparkles(x, y, 8);
+
+      // Staggered satellite bursts around the screen
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      [
+        [W * 0.15, H * 0.3],
+        [W * 0.85, H * 0.3],
+        [W * 0.5,  H * 0.75],
+        [W * 0.25, H * 0.6],
+        [W * 0.75, H * 0.6],
+      ].forEach(([bx, by], i) => {
+        setTimeout(() => {
+          spawnHearts(bx, by, 6);
+          spawnSparkles(bx, by, 3);
+        }, 200 + i * 130);
+      });
+
+      // Pulse the love button once
+      btnLove.classList.add('is-pulsing');
+      setTimeout(() => btnLove.classList.remove('is-pulsing'), 600);
+
+      // Hide and disable the no button
+      btnNo.style.opacity       = '0';
+      btnNo.style.pointerEvents = 'none';
+      btnNo.setAttribute('aria-hidden', 'true');
+
+      // Show the success banner and final overlay after a short delay
+      msgBox.classList.remove('is-visible');
+      setTimeout(() => {
+        successBanner.classList.add('is-visible');
+        finalOverlay.classList.add('is-active');
+
+        // Continuous burst for 2 seconds
+        let burstCount = 0;
+        const burstInterval = setInterval(() => {
+          spawnHearts(
+            60 + Math.random() * (W - 120),
+            80 + Math.random() * (H - 160),
+            4
+          );
+          if (++burstCount >= 8) clearInterval(burstInterval);
+        }, 250);
+      }, 350);
+    }
+
+    /** Called when the user clicks "မချစ်ဘူး 😏". */
+    function handleNo() {
+      if (hasWon) return;
+      noCount++;
+
+      growLoveButton();
+      moveNoButton();
+
+      // Show the reaction for this click (clamp to last message)
+      const reactionIndex = Math.min(noCount - 1, NO_REACTIONS.length - 1);
+      showMessage(NO_REACTIONS[reactionIndex]);
+
+      if (noCount >= NO_DISABLE_AFTER) {
+        // Final state: disable the no button and hint at the love button
+        btnNo.style.opacity       = '0.15';
+        btnNo.style.pointerEvents = 'none';
+        btnNo.setAttribute('aria-hidden', 'true');
+        finalOverlay.classList.add('is-active');
+
+        // Spawn hearts from love button as a visual cue
+        const { x, y } = centerOf(btnLove);
+        spawnHearts(x, y, 10);
+        spawnSparkles(x, y, 5);
+      }
+
+      // Gentle pulse on the love button to draw attention
+      btnLove.classList.add('is-pulsing');
+      setTimeout(() => btnLove.classList.remove('is-pulsing'), 600);
+    }
+
+    /* ════════════════════════════════════════════════════════
+       NO BUTTON – DODGE ON HOVER (after 2+ no-clicks)
+    ════════════════════════════════════════════════════════ */
+    btnNo.addEventListener('mouseenter', () => {
+      if (noCount >= 2 && !hasWon) moveNoButton();
+    });
+
+    /* ════════════════════════════════════════════════════════
+       RE-PLACE NO BUTTON ON WINDOW RESIZE
+       Keeps initial placement correct if device rotates or
+       the browser window is resized before any no-clicks.
+    ════════════════════════════════════════════════════════ */
+    window.addEventListener('resize', () => {
+      if (noCount === 0 && !hasWon) placeNoButtonBesideLove();
+    });
+  </script>
+</body>
+</html>
